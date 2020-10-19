@@ -10,7 +10,7 @@
 - Amrutha Ravi
 - Madeline Rys
 
-[bar]: #bettors "Bettors collection"
+[bar]: #boo "Boobar collection"
 ### GitHub URL
 
 https://github.com/madelinerys/CS546-Final-Project

@@ -1,6 +1,6 @@
 ## Sports Wagering Database Proposal
 
-[bar] #bettors "Bettors collection"
+[bar]
 
 ### Team members
 
@@ -10,6 +10,7 @@
 - Amrutha Ravi
 - Madeline Rys
 
+[bar]: #bettors "Bettors collection"
 ### GitHub URL
 
 https://github.com/madelinerys/CS546-Final-Project

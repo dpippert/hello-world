@@ -10,7 +10,7 @@
 - Amrutha Ravi
 - Madeline Rys
 
-[bar]: #boo "Boobar collection"
+
 ### GitHub URL
 
 https://github.com/madelinerys/CS546-Final-Project
@@ -99,6 +99,7 @@ Seeded with all 32 NFL Teams.
   </tbody>
 </table>
 
+[bar]: #boo "Boobar collection"
 #### Lines collection
 
 <table>

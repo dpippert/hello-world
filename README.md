@@ -241,21 +241,21 @@ the line having the most recent date.
       <td></td>
     </tr>
     <tr>
-      <td>abbrev</td>
-      <td>Three-letter unique business key</td>
-      <td>Enhances readability</td>
+      <td>username</td>
+      <td>String</td>
+      <td></td>
     </tr>
     <tr>
-      <td>fran</td>
+      <td>pwd</td>
       <td>String</td>
-      <td>Franchise name, typically locale/city/state of team</td>
+      <td>Hashed password</td>
     </tr>
     <tr>
-      <td>nn</td>
-      <td>String</td>
-      <td>Team nickname</td>
+      <td>balance</td>
+      <td>Number</td>
+      <td>Dollar balance in account</td>
     </tr>
-  </tbody>
+</tbody>
 </table>
 
 1. Surprisingly, this collection will be seeded with exactly the same 1000 people

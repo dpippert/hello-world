@@ -1,7 +1,5 @@
 ## Sports Wagering Database Proposal
 
-[foo][bar]
-
 [bar]: #bettors "Bettors collection"
 
 ### Team members

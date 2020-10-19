@@ -1,5 +1,9 @@
 ## Sports Wagering Database Proposal
 
+[foo][bar]
+
+[bar]: /url "title"
+
 ### Team members
 
 - Christian Wettre

@@ -1,6 +1,6 @@
 ## Sports Wagering Database Proposal
 
-[bar]
+[bar
 
 ### Team members
 
@@ -10,6 +10,7 @@
 - Amrutha Ravi
 - Madeline Rys
 
+[voodoo]#bettors
 
 ### GitHub URL
 

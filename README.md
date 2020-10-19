@@ -172,7 +172,7 @@ the line having the most recent date.
     <tr>
       <td>bettorid</td>
       <td>ObjectId</td>
-      <td>_id of the bettor from the [Bettors](#bettors) collection</td>
+      <td>_id of the bettor from the [Bettors]: #bettors collection</td>
     </tr>
     <tr>
       <td>abbrev</td>

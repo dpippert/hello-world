@@ -91,7 +91,7 @@ Seeded with all 32 NFL Teams.
     <tr>
       <td>nn</td>
       <td>String</td>
-      <td>Team nickname/td>
+      <td>Team nickname</td>
     </tr>
   </tbody>
 </table>
@@ -143,19 +143,56 @@ the line having the most recent date.
 
 1. Meaning of thenum depends on ltype as follows.
 
-a. **AML** Away team money line.
+    a. **AML** Away team money line.
 
-a. **HML** Home team money line.
+    a. **HML** Home team money line.
 
-a. **ASP** Away team spread.
+    a. **ASP** Away team spread.
+    
+    a. **HSP** Home team spread.
+    
+    a. **OV** Over points.
 
-a. **HSP** Home team spread.
-
-a. **OV** Over points.
-
-a. **UN** Under points.
+    a. **UN** Under points.
 
 #### Bets collection
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th><th>Type</th><th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>_id</td>
+      <td>ObjectId</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>bettorid</td>
+      <td>ObjectId</td>
+      <td>_id of the bettor from the [Bettors](#bettors) collection</td>
+    </tr>
+    <tr>
+      <td>abbrev</td>
+      <td>Three-letter unique business key</td>
+      <td>Enhances readability</td>
+    </tr>
+    <tr>
+      <td>fran</td>
+      <td>String</td>
+      <td>Franchise name, typically locale/city/state of team</td>
+    </tr>
+    <tr>
+      <td>nn</td>
+      <td>String</td>
+      <td>Team nickname</td>
+    </tr>
+  </tbody>
+</table>
+
+#### Codes collection
 
 <table>
   <thead>
@@ -182,8 +219,45 @@ a. **UN** Under points.
     <tr>
       <td>nn</td>
       <td>String</td>
-      <td>Team nickname/td>
+      <td>Team nickname</td>
     </tr>
   </tbody>
 </table>
 
+<h4 id="bettors">Bettors collection</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th><th>Type</th><th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>_id</td>
+      <td>ObjectId</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>abbrev</td>
+      <td>Three-letter unique business key</td>
+      <td>Enhances readability</td>
+    </tr>
+    <tr>
+      <td>fran</td>
+      <td>String</td>
+      <td>Franchise name, typically locale/city/state of team</td>
+    </tr>
+    <tr>
+      <td>nn</td>
+      <td>String</td>
+      <td>Team nickname</td>
+    </tr>
+  </tbody>
+</table>
+
+1. Surprisingly, this collection will be seeded with exactly the same 1000 people
+as are present in an earlier people.json lab.
+
+1. It turns out that the exact same people from our earlier people.json lab, all
+have an interest in being bettors and are seeded into this collection.

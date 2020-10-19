@@ -1,6 +1,6 @@
 ## Sports Wagering Database Proposal
 
-[bar
+[voodoo]
 
 ### Team members
 
@@ -10,7 +10,6 @@
 - Amrutha Ravi
 - Madeline Rys
 
-[voodoo]#bettors
 
 ### GitHub URL
 
@@ -100,7 +99,7 @@ Seeded with all 32 NFL Teams.
   </tbody>
 </table>
 
-[bar]: #boo "Boobar collection"
+[voodoo]: #lines "Lines collection"
 #### Lines collection
 
 <table>

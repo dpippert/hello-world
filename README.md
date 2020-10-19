@@ -1,7 +1,5 @@
 ## Sports Wagering Database Proposal
 
-[voodoo]
-
 ### Team members
 
 - Christian Wettre
@@ -9,7 +7,6 @@
 - Dale Pippert
 - Amrutha Ravi
 - Madeline Rys
-
 
 ### GitHub URL
 
@@ -99,7 +96,6 @@ Seeded with all 32 NFL Teams.
   </tbody>
 </table>
 
-[voodoo]: #lines "Lines collection"
 #### Lines collection
 
 <table>

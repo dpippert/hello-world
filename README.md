@@ -2,7 +2,7 @@
 
 [foo][bar]
 
-[bar]: /url "title"
+[bar]: #bettors "Bettors collection"
 
 ### Team members
 

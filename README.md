@@ -16,11 +16,10 @@ Contests in sports come in various shapes and sizes. The only type of contest
 supported by our first phase delivery is a <a href=#game>game</a>. A game is
 modeled in Mongo as depicted in Table TBD below.
 
+#### Games collection
+
 <table>
   <thead>
-    <tr>
-      <th cols="3">Game</th>
-    </tr>
     <tr>
       <th>Field</th><th>Type</th><th>Notes</th>
     </tr>
@@ -55,6 +54,135 @@ modeled in Mongo as depicted in Table TBD below.
       <td>date</td>
       <td>Date</td>
       <td>Only mm/dd/yyyy needed</td>
+    </tr>
+  </tbody>
+</table>
+
+Notes
+
+1. A null ascore or hscore indicates a game that has either not yet played, is currently 
+in progress, or has completed but the score has not yet been captured by the system.
+
+#### Teams collection
+Seeded with all 32 NFL Teams.
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th><th>Type</th><th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>_id</td>
+      <td>ObjectId</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>abbrev</td>
+      <td>Three-letter unique business key</td>
+      <td>Enhances readability</td>
+    </tr>
+    <tr>
+      <td>fran</td>
+      <td>String</td>
+      <td>Franchise name, typically locale/city/state of team</td>
+    </tr>
+    <tr>
+      <td>nn</td>
+      <td>String</td>
+      <td>Team nickname/td>
+    </tr>
+  </tbody>
+</table>
+
+#### Lines collection
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th><th>Type</th><th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>_id</td>
+      <td>ObjectId</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>gameid</td>
+      <td>ObjectId</td>
+      <td>_id from Games collection</td>
+    </tr>
+    <tr>
+      <td>ltype</td>
+      <td>AML|HML|ASP|HSP|OV|UN</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>thenum</td>
+      <td></td>
+      <td>your number</td>
+    </tr>
+    <tr>
+      <td>date</td>
+      <td>Date</td>
+      <td>mm/dd/yyyy</td>
+    </tr>
+  </tbody>
+</table>
+
+1. There can be many documents for any given gameid and ltype.
+
+1. For any given gameid and ltype, the current line for that gameid
+and ltype is the line with the most recent date.
+
+1. For any given gameid and ltype, bets are always placed against
+the line having the most recent date.
+
+1. Meaning of thenum depends on ltype as follows.
+
+a. **AML** Away team money line.
+
+a. **HML** Home team money line.
+
+a. **ASP** Away team spread.
+
+a. **HSP** Home team spread.
+
+a. **OV** Over points.
+
+a. **UN** Under points.
+
+#### Bets collection
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th><th>Type</th><th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>_id</td>
+      <td>ObjectId</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>abbrev</td>
+      <td>Three-letter unique business key</td>
+      <td>Enhances readability</td>
+    </tr>
+    <tr>
+      <td>fran</td>
+      <td>String</td>
+      <td>Franchise name, typically locale/city/state of team</td>
+    </tr>
+    <tr>
+      <td>nn</td>
+      <td>String</td>
+      <td>Team nickname/td>
     </tr>
   </tbody>
 </table>

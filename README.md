@@ -17,11 +17,16 @@ supported by our first phase delivery is a <a href=#game>game</a>. A game is
 modeled in Mongo as depicted in Table TBD below.
 
 #### Games collection
+Each document is an NFL game, capturing only those aspects of a game that are
+relevant to the system. An NFL season is 17 weeks with 14 games per week, so this
+collection for a full season would have 17 * 14 = 238 documents in it.
+
+##### Games schema
 
 <table>
   <thead>
     <tr>
-      <th>Field</th><th>Type</th><th>Notes</th>
+      <th>Field</th><th>Type</th><th>Description</th>
     </tr>
   </thead>
   <tbody>
@@ -41,6 +46,16 @@ modeled in Mongo as depicted in Table TBD below.
       <td></td>
     </tr>
     <tr>
+      <td>week</td>
+      <td>Integer</td>
+      <td>Week of the season, 1-17</td>
+    </tr>
+    <tr>
+      <td>date</td>
+      <td>Date</td>
+      <td>Only mm/dd/yyyy needed</td>
+    </tr>
+    <tr>
       <td>ascore</td>
       <td>Integer</td>
       <td>Away team final score</td>
@@ -50,15 +65,24 @@ modeled in Mongo as depicted in Table TBD below.
       <td>Integer</td>
       <td>Home team final score</td>
     </tr>
-    <tr>
-      <td>date</td>
-      <td>Date</td>
-      <td>Only mm/dd/yyyy needed</td>
-    </tr>
   </tbody>
 </table>
 
-Notes
+##### Games example document
+
+```
+{
+  _id: "5f8578c116e3409b5b276d50",
+  away: "TEx"
+  home: "TIT"
+  week: 6
+  date: 10/18/2020
+  ascore: 36
+  hscore: 42
+}
+```
+
+##### Notes
 
 1. A null ascore or hscore indicates a game that has either not yet played, is currently 
 in progress, or has completed but the score has not yet been captured by the system.
@@ -69,7 +93,7 @@ Seeded with all 32 NFL Teams.
 <table>
   <thead>
     <tr>
-      <th>Field</th><th>Type</th><th>Notes</th>
+      <th>Field</th><th>Type</th><th>Description</th>
     </tr>
   </thead>
   <tbody>
@@ -96,12 +120,12 @@ Seeded with all 32 NFL Teams.
   </tbody>
 </table>
 
-#### Lines collection
+<h2 id="lines">Lines collection</h2>
 
 <table>
   <thead>
     <tr>
-      <th>Field</th><th>Type</th><th>Notes</th>
+      <th>Field</th><th>Type</th><th>Description</th>
     </tr>
   </thead>
   <tbody>
@@ -160,7 +184,7 @@ the line having the most recent date.
 <table>
   <thead>
     <tr>
-      <th>Field</th><th>Type</th><th>Notes</th>
+      <th>Field</th><th>Type</th><th>Description</th>
     </tr>
   </thead>
   <tbody>
@@ -175,14 +199,29 @@ the line having the most recent date.
       <td>_id of the bettor from the [Bettors](#bettors) collection</td>
     </tr>
     <tr>
-      <td>abbrev</td>
-      <td>Three-letter unique business key</td>
+      <td>lineid</td>
+      <td>_id of the line from the [Lines](#lines) collection</td>
       <td>Enhances readability</td>
     </tr>
     <tr>
-      <td>fran</td>
-      <td>String</td>
-      <td>Franchise name, typically locale/city/state of team</td>
+      <td>amount</td>
+      <td>Number</td>
+      <td>Dollar amount of the bet</td>
+    </tr>
+    <tr>
+      <td>paid</td>
+      <td>Number</td>
+      <td>Dollars this bet paid, or null if still live</td>
+    </tr>
+    <tr>
+      <td>date</td>
+      <td>Date</td>
+      <td>Time and Date of the bet</td>
+    </tr>
+    <tr>
+      <td>paydate</td>
+      <td>Date</td>
+      <td>Time and Date of bet paid</td>
     </tr>
     <tr>
       <td>nn</td>
@@ -197,7 +236,7 @@ the line having the most recent date.
 <table>
   <thead>
     <tr>
-      <th>Field</th><th>Type</th><th>Notes</th>
+      <th>Field</th><th>Type</th><th>Description</th>
     </tr>
   </thead>
   <tbody>
@@ -229,7 +268,7 @@ the line having the most recent date.
 <table>
   <thead>
     <tr>
-      <th>Field</th><th>Type</th><th>Notes</th>
+      <th>Field</th><th>Type</th><th>Description</th>
     </tr>
   </thead>
   <tbody>
@@ -241,7 +280,7 @@ the line having the most recent date.
     <tr>
       <td>abbrev</td>
       <td>Three-letter unique business key</td>
-      <td>Enhances readability</td>
+      <td>Enhances readability over use of just _id</td>
     </tr>
     <tr>
       <td>fran</td>
@@ -257,7 +296,4 @@ the line having the most recent date.
 </table>
 
 1. Surprisingly, this collection will be seeded with exactly the same 1000 people
-as are present in an earlier people.json lab.
-
-1. It turns out that the exact same people from our earlier people.json lab, all
-have an interest in being bettors and are seeded into this collection.
+as are present in an earlier people.json lab. They all like to bet.

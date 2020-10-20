@@ -73,22 +73,25 @@ collection for a full season would have 17 * 14 = 238 documents in it.
 ```
 {
   _id: "5f8578c116e3409b5b276d50",
-  away: "TEx"
-  home: "TIT"
-  week: 6
-  date: 10/18/2020
-  ascore: 36
-  hscore: 42
+  away: "TEX",
+  home: "TIT",
+  week: 6,
+  date: 10/18/2020,
+  ascore: 36,
+  hscore: 42,
 }
 ```
 
-##### Notes
+##### Games notes
 
 1. A null ascore or hscore indicates a game that has either not yet played, is currently 
 in progress, or has completed but the score has not yet been captured by the system.
 
 #### Teams collection
-Seeded with all 32 NFL Teams.
+A seeded reference collection to store static information for all 32 NFL teams. This
+collection has exactly 32 documents in it, one per team.
+
+##### Teams schema
 
 <table>
   <thead>
@@ -120,7 +123,22 @@ Seeded with all 32 NFL Teams.
   </tbody>
 </table>
 
+##### Teams example document
+
+```
+{
+  _id: "5f85808c9dad05d358aae011",
+  abbrev: "TIT",
+  fran: "Tennessee",
+  nn: "Titans"
+}
+```
+
 <h2 id="lines">Lines collection</h2>
+Stores betting lines for each game. The system populates this collection on a week-by-week,
+day-by-day basis. It is updated with new lines every day or two via a background job.
+
+##### Lines schema
 
 <table>
   <thead>
@@ -145,9 +163,9 @@ Seeded with all 32 NFL Teams.
       <td></td>
     </tr>
     <tr>
-      <td>thenum</td>
-      <td></td>
-      <td>your number</td>
+      <td>num</td>
+      <td>Integer</td>
+      <td>your number, may be negative, 0, or positive</td>
     </tr>
     <tr>
       <td>date</td>
@@ -157,6 +175,20 @@ Seeded with all 32 NFL Teams.
   </tbody>
 </table>
 
+##### Lines example document
+
+```
+{
+  _id: "5f85808c9dad05d358aae00a",
+  gameid: "5f8578c116e3409b5b276d50",
+  ltype: "ASP",
+  num: -2,
+  date: "10/16/2020"
+}
+```
+
+##### Lines notes
+
 1. There can be many documents for any given gameid and ltype.
 
 1. For any given gameid and ltype, the current line for that gameid
@@ -165,7 +197,7 @@ and ltype is the line with the most recent date.
 1. For any given gameid and ltype, bets are always placed against
 the line having the most recent date.
 
-1. Meaning of thenum depends on ltype as follows.
+1. Meaning of num depends on ltype as follows.
 
     a. **AML** Away team money line.
 
@@ -180,6 +212,9 @@ the line having the most recent date.
     a. **UN** Under points.
 
 #### Bets collection
+Records and stores bets. Each document is a bet from a bettor aka user.
+
+##### Bets schema
 
 <table>
   <thead>
@@ -214,24 +249,31 @@ the line having the most recent date.
       <td>Dollars this bet paid, or null if still live</td>
     </tr>
     <tr>
-      <td>date</td>
+      <td>enter</td>
       <td>Date</td>
       <td>Time and Date of the bet</td>
     </tr>
     <tr>
-      <td>paydate</td>
+      <td>end</td>
       <td>Date</td>
-      <td>Time and Date of bet paid</td>
-    </tr>
-    <tr>
-      <td>nn</td>
-      <td>String</td>
-      <td>Team nickname</td>
+      <td>Time and Date the bet resolved</td>
     </tr>
   </tbody>
 </table>
 
+##### Bets example document
+
+````
+{
+}
+````
+
 #### Codes collection
+Miscellaneous static reference codes used by the application. Captured in
+one collection for ease of expansion as needed. Each code type may require
+only some of the listed fields have values.
+
+##### Codes schema
 
 <table>
   <thead>
@@ -246,22 +288,32 @@ the line having the most recent date.
       <td></td>
     </tr>
     <tr>
-      <td>abbrev</td>
-      <td>Three-letter unique business key</td>
-      <td>Enhances readability</td>
+      <td>ctype</td>
+      <td>String</td>
+      <td>Code type/td>
     </tr>
     <tr>
-      <td>fran</td>
+      <td>cname</td>
       <td>String</td>
-      <td>Franchise name, typically locale/city/state of team</td>
+      <td>Code name/td>
     </tr>
     <tr>
-      <td>nn</td>
+      <td>cvalue</td>
       <td>String</td>
-      <td>Team nickname</td>
+      <td>Code value/td>
     </tr>
   </tbody>
 </table>
+
+##### Codes example entry
+
+```
+{
+  _id: "5f85808c9dad05d358aae00c",
+  ctype: "LType",
+  descr: "Line type"
+}
+```
 
 <h4 id="bettors">Bettors collection</h2>
 

@@ -316,6 +316,8 @@ only some of the listed fields have values.
 ```
 
 <h4 id="bettors">Bettors collection</h2>
+These are users aka bettors that have signed up. Seeded with 1000 bettors for demo
+purposes.
 
 <table>
   <thead>

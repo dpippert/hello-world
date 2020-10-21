@@ -78,6 +78,8 @@ job is responsible for populating this collection.
   </tbody>
 </table>
 
+<div class="page"/>
+
 #### Games example document
 
 ```
@@ -122,12 +124,12 @@ collection has exactly 32 documents in it, one per team.
     <tr>
       <td>abbrv</td>
       <td>String</td>
-      <td>Three-letter unique business key to enhance readability</td>
+      <td>Three-letter unique business key to enhance readability.</td>
     </tr>
     <tr>
       <td>fran</td>
       <td>String</td>
-      <td>Franchise name, typically locale/city/state of team</td>
+      <td>Franchise name, typically locale/city/state of team.</td>
     </tr>
     <tr>
       <td>nn</td>
@@ -180,7 +182,7 @@ day-by-day basis. It is updated with new lines every day or two via a background
     <tr>
       <td>num</td>
       <td>Integer</td>
-      <td>The number, the meaning of which depends on ltype; may be positive, negative, or 0</td>
+      <td>The number, the meaning of which depends on ltype; may be positive, negative, or 0.</td>
     </tr>
     <tr>
       <td>date</td>
@@ -353,4 +355,4 @@ These are users aka bettors that have signed up. Possibly (time permitting) seed
 ```
 
 1. Surprisingly, this collection will be seeded with exactly the same 1000 people
-as are present in an earlier people.json lab. They all like to bet.
+as are present in an earlier people.json lab. They all like to bet!

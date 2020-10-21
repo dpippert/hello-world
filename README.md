@@ -24,7 +24,8 @@ job is responsible for populating this collection.
 
 #### Games schema
 
-<font face="Courier New" size="9"/>
+<font face="Courier New" size="7"/>
+
 <table>
   <thead>
     <tr>

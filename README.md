@@ -97,6 +97,9 @@ job is responsible for populating this collection.
 1. GMT is four hours ahead of EDT, and five hours ahead of EST. For example,
 1:00 PM EDT is 5:00 PM GMT.
 
+1. Designators for teams defined in <a href=#teams>Teams</a> collection as
+Teams.abbrv.
+
 <h2 id="teams">Teams collection</h2>
 
 A seeded reference collection to store static information for all 32 NFL teams. This
@@ -117,9 +120,9 @@ collection has exactly 32 documents in it, one per team.
       <td></td>
     </tr>
     <tr>
-      <td>abbrev</td>
-      <td>Three-letter unique business key</td>
-      <td>Enhances readability</td>
+      <td>abbrv</td>
+      <td>String</td>
+      <td>Three-letter unique business key to enhance readability</td>
     </tr>
     <tr>
       <td>fran</td>

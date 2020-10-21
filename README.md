@@ -14,14 +14,19 @@ https://github.com/madelinerys/CS546-Final-Project
 
 Contests in sports come in various shapes and sizes. The only type of contest
 supported by our first phase delivery is a <a href=#game>game</a>. A game is
-modeled in Mongo as depicted in Table TBD below.
+modeled in Mongo as depicted in the Games collection below.
 
-#### Games collection
-Each document is an NFL game, capturing only those aspects of a game that are
-relevant to the system. An NFL season is 17 weeks with 14 games per week, so this
-collection for a full season would have 17 * 14 = 238 documents in it.
+<h2 id="games">Games collection</h2>
 
-##### Games schema
+Each document describes an NFL game, capturing only those few aspects of
+a game that are relevant to the system, such as its start date and time,
+and final score.  An NFL season is 17 weeks with 14 games per week, so
+this collection for a full season would have 17 * 14 = 238 documents in
+it. Each week, another 14 games are added to the table. Alternatively,
+it could be seeded with all 238 games at once. Either way an automated
+job is responsible for populating this collection.
+
+#### Games schema
 
 <table>
   <thead>
@@ -48,27 +53,36 @@ collection for a full season would have 17 * 14 = 238 documents in it.
     <tr>
       <td>week</td>
       <td>Integer</td>
-      <td>Week of the season, 1-17</td>
+      <td>Week of the season, 1-17. NFL weeks start on Tuesday and end on
+      Monday. As a frame of reference, 10/21/2020 is in Week 7. If you want
+      to know, for example, what is the _current_ _week_ right now_ as a frame
+      of reference you can go to https://www.espn.com/nfl/schedule and it
+      should default to bring up the current week.</td>
     </tr>
     <tr>
-      <td>date</td>
+      <td>start</td>
       <td>Date</td>
-      <td>Only mm/dd/yyyy needed</td>
+      <td>Game start date and time GMT. The system will not allow bets to be
+      placed on any game where **start** is >= current date and time. Upcoming
+      games must be inserted into this table at least one week prior to *start*,
+      so that bettors have a chance to place their wagers on the game.</td>
     </tr>
     <tr>
       <td>ascore</td>
       <td>Integer</td>
-      <td>Away team final score</td>
+      <td>Away team final score. Null up until when the game has finished and the
+      system has processed the final score feed.</td>
     </tr>
     <tr>
       <td>hscore</td>
       <td>Integer</td>
-      <td>Home team final score</td>
+      <td>Home team final score. Null up until when the game has finished and the
+      system has processed the final score feed.</td>
     </tr>
   </tbody>
 </table>
 
-##### Games example document
+#### Games example document
 
 ```
 {
@@ -76,22 +90,23 @@ collection for a full season would have 17 * 14 = 238 documents in it.
   away: "TEX",
   home: "TIT",
   week: 6,
-  date: 10/18/2020,
+  date: "2020-10-18T17:00:00.000Z"
   ascore: 36,
   hscore: 42,
 }
 ```
 
-##### Games notes
+#### Games notes
 
-1. A null ascore or hscore indicates a game that has either not yet played, is currently 
-in progress, or has completed but the score has not yet been captured by the system.
+1. GMT is four hours ahead of EDT, and five hours ahead of EST. For example,
+1:00 PM EDT is 5:00 PM GMT.
 
-#### Teams collection
+<h2 id="teams">Teams collection</h2>
+
 A seeded reference collection to store static information for all 32 NFL teams. This
 collection has exactly 32 documents in it, one per team.
 
-##### Teams schema
+#### Teams schema
 
 <table>
   <thead>
@@ -123,7 +138,7 @@ collection has exactly 32 documents in it, one per team.
   </tbody>
 </table>
 
-##### Teams example document
+#### Teams example document
 
 ```
 {
@@ -135,10 +150,11 @@ collection has exactly 32 documents in it, one per team.
 ```
 
 <h2 id="lines">Lines collection</h2>
+
 Stores betting lines for each game. The system populates this collection on a week-by-week,
 day-by-day basis. It is updated with new lines every day or two via a background job.
 
-##### Lines schema
+#### Lines schema
 
 <table>
   <thead>
@@ -159,13 +175,13 @@ day-by-day basis. It is updated with new lines every day or two via a background
     </tr>
     <tr>
       <td>ltype</td>
-      <td>AML|HML|ASP|HSP|OV|UN</td>
-      <td></td>
+      <td>String</td>
+      <td>AML|HML|ASP|HSP|OV|UN (see notes)</td>
     </tr>
     <tr>
       <td>num</td>
       <td>Integer</td>
-      <td>your number, may be negative, 0, or positive</td>
+      <td>The number, the meaning of which depends on ltype; may be positive, negative, or 0</td>
     </tr>
     <tr>
       <td>date</td>
@@ -175,7 +191,7 @@ day-by-day basis. It is updated with new lines every day or two via a background
   </tbody>
 </table>
 
-##### Lines example document
+#### Lines example document
 
 ```
 {
@@ -187,7 +203,7 @@ day-by-day basis. It is updated with new lines every day or two via a background
 }
 ```
 
-##### Lines notes
+#### Lines notes
 
 1. There can be many documents for any given gameid and ltype.
 
@@ -211,10 +227,12 @@ the line having the most recent date.
 
     a. **UN** Under points.
 
-#### Bets collection
-Records and stores bets. Each document is a bet from a bettor aka user.
+<h2 id="bets">Bets collection</h2>
 
-##### Bets schema
+Records and stores bets. Each document is a bet from a bettor aka user. The
+user interface is used to enter bets.
+
+#### Bets schema
 
 <table>
   <thead>
@@ -231,12 +249,12 @@ Records and stores bets. Each document is a bet from a bettor aka user.
     <tr>
       <td>bettorid</td>
       <td>ObjectId</td>
-      <td>_id of the bettor from the [Bettors]: #bettors collection</td>
+      <td>_id of the bettor</td>
     </tr>
     <tr>
       <td>lineid</td>
-      <td>_id of the line from the [Lines](#lines) collection</td>
-      <td>Enhances readability</td>
+      <td>ObjectId</td>
+      <td>_id of the line</td>
     </tr>
     <tr>
       <td>amount</td>
@@ -261,7 +279,7 @@ Records and stores bets. Each document is a bet from a bettor aka user.
   </tbody>
 </table>
 
-##### Bets example document
+#### Bets example document
 
 ````
 {
@@ -275,12 +293,13 @@ Records and stores bets. Each document is a bet from a bettor aka user.
 }
 ````
 
-#### Codes collection
+<h2 id="codes">Codes collection</h2>
+
 Miscellaneous static reference codes used by the application. Captured in
 one collection for ease of expansion as needed. Each code type may require
-only some of the listed fields have values.
+that only some of the listed fields have non-null values.
 
-##### Codes schema
+#### Codes schema
 
 <table>
   <thead>
@@ -312,7 +331,7 @@ only some of the listed fields have values.
   </tbody>
 </table>
 
-##### Codes example entry
+#### Codes example entry
 
 ```
 {
@@ -322,9 +341,10 @@ only some of the listed fields have values.
 }
 ```
 
-<h4 id="bettors">Bettors collection</h2>
-These are users aka bettors that have signed up. Seeded with 1000 bettors for demo
-purposes.
+<h2 id="bettors">Bettors collection</h2>
+
+These are users aka bettors that have signed up. Possibly (time permitting) seeded with
+1000 bettors for demo purposes.
 
 <table>
   <thead>

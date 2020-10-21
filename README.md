@@ -204,26 +204,26 @@ day-by-day basis. It is updated with new lines every day or two via a background
 
 #### Lines notes
 
-1. ltype valid values are:
+- ltype valid values are:
 
-    1. **AML** Away team money line.
+  - **AML** Away team money line.
 
-    1. **HML** Home team money line.
+  - **HML** Home team money line.
 
-    1. **ASP** Away team spread.
+  - **ASP** Away team spread.
     
-    1. **HSP** Home team spread.
+  - **HSP** Home team spread.
     
-    1. **OV** Over points.
+  - **OV** Over points.
 
-    1. **UN** Under points.
+  - **UN** Under points.
 
-1. There can be many documents for any given gameid and ltype.
+- There can be many documents for any given gameid and ltype.
 
-1. For any given gameid and ltype, the current line for that gameid
+- For any given gameid and ltype, the current line for that gameid
 and ltype is the line with the most recent date.
 
-1. For any given gameid and ltype, bets are always placed against
+- For any given gameid and ltype, bets are always placed against
 the line having the most recent date, i.e., the current line.
 
 <h2 id="bets">Bets collection</h2>

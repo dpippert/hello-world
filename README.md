@@ -1,3 +1,5 @@
+<basefont size="9"/>
+
 ## Sports Wagering Database Proposal
 
 ### Team members
@@ -11,10 +13,6 @@
 ### GitHub URL
 
 https://github.com/madelinerys/CS546-Final-Project
-
-Contests in sports come in various shapes and sizes. The only type of contest
-supported by our first phase delivery is a <a href=#game>game</a>. A game is
-modeled in Mongo as depicted in the Games collection below.
 
 <h2 id="games">Games collection</h2>
 
@@ -215,17 +213,17 @@ the line having the most recent date.
 
 1. Meaning of num depends on ltype as follows.
 
-    a. **AML** Away team money line.
+    1. **AML** Away team money line.
 
-    a. **HML** Home team money line.
+    1. **HML** Home team money line.
 
-    a. **ASP** Away team spread.
+    1. **ASP** Away team spread.
     
-    a. **HSP** Home team spread.
+    1. **HSP** Home team spread.
     
-    a. **OV** Over points.
+    1. **OV** Over points.
 
-    a. **UN** Under points.
+    1. **UN** Under points.
 
 <h2 id="bets">Bets collection</h2>
 
@@ -292,54 +290,6 @@ user interface is used to enter bets.
   end: null
 }
 ````
-
-<h2 id="codes">Codes collection</h2>
-
-Miscellaneous static reference codes used by the application. Captured in
-one collection for ease of expansion as needed. Each code type may require
-that only some of the listed fields have non-null values.
-
-#### Codes schema
-
-<table>
-  <thead>
-    <tr>
-      <th>Field</th><th>Type</th><th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>_id</td>
-      <td>ObjectId</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>ctype</td>
-      <td>String</td>
-      <td>Code type/td>
-    </tr>
-    <tr>
-      <td>cname</td>
-      <td>String</td>
-      <td>Code name/td>
-    </tr>
-    <tr>
-      <td>cvalue</td>
-      <td>String</td>
-      <td>Code value/td>
-    </tr>
-  </tbody>
-</table>
-
-#### Codes example entry
-
-```
-{
-  _id: "5f85808c9dad05d358aae00c",
-  ctype: "LType",
-  descr: "Line type"
-}
-```
 
 <h2 id="bettors">Bettors collection</h2>
 

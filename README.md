@@ -12,6 +12,8 @@
 
 https://github.com/madelinerys/CS546-Final-Project
 
+<div class="page"/>
+
 <h2 id="games">Games collection</h2>
 
 Each document describes an NFL game, capturing only those few aspects of
@@ -78,8 +80,6 @@ job is responsible for populating this collection.
   </tbody>
 </table>
 
-<div class="page"/>
-
 #### Games example document
 
 ```
@@ -101,6 +101,8 @@ job is responsible for populating this collection.
 
 1. Designators for teams defined in <a href=#teams>Teams</a> collection as
 Teams.abbrv.
+
+<div class="page"/>
 
 <h2 id="teams">Teams collection</h2>
 
@@ -150,7 +152,9 @@ collection has exactly 32 documents in it, one per team.
 }
 ```
 
-<h2 id="lines">Lines collection</h2>
+<div class="page"/>
+
+<h3 id="lines">Lines collection</h3>
 
 Stores betting lines for each game. The system populates this collection on a week-by-week,
 day-by-day basis. It is updated with new lines every day or two via a background job.
@@ -227,6 +231,8 @@ and ltype is the line with the most recent date.
 
 1. For any given gameid and ltype, bets are always placed against
 the line having the most recent date, i.e., the current line.
+
+<div class="page"/>
 
 <h2 id="bets">Bets collection</h2>
 
@@ -305,6 +311,8 @@ user interface is used to enter bets.
   end: null
 }
 ````
+
+<div class="page"/>
 
 <h2 id="bettors">Bettors collection</h2>
 

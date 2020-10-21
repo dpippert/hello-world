@@ -309,6 +309,8 @@ user interface is used to enter bets.
 These are users aka bettors that have signed up. Possibly (time permitting) seeded with
 1000 bettors for demo purposes.
 
+#### Bettors schema
+
 <table>
   <thead>
     <tr>
@@ -329,7 +331,7 @@ These are users aka bettors that have signed up. Possibly (time permitting) seed
     <tr>
       <td>pwd</td>
       <td>String</td>
-      <td>Hashed password</td>
+      <td>md5 hashed password</td>
     </tr>
     <tr>
       <td>balance</td>
@@ -338,6 +340,16 @@ These are users aka bettors that have signed up. Possibly (time permitting) seed
     </tr>
 </tbody>
 </table>
+
+#### Bettors example document
+
+```
+{
+  _id: "3e85908c9dad05d2589ae104", 
+  username: "foghorn5",
+  pwd: "d4ec6fe6cec7f63630376c0af7212a52",
+  balance: 250.00
+}
 
 1. Surprisingly, this collection will be seeded with exactly the same 1000 people
 as are present in an earlier people.json lab. They all like to bet.

@@ -206,17 +206,17 @@ day-by-day basis. It is updated with new lines every day or two via a background
 
 1. ltype valid values are:
 
-  1. **AML** Away team money line.
+    1. **AML** Away team money line.
 
-  1. **HML** Home team money line.
+    1. **HML** Home team money line.
 
-  1. **ASP** Away team spread.
+    1. **ASP** Away team spread.
     
-  1. **HSP** Home team spread.
+    1. **HSP** Home team spread.
     
-  1. **OV** Over points.
+    1. **OV** Over points.
 
-  1. **UN** Under points.
+    1. **UN** Under points.
 
 1. There can be many documents for any given gameid and ltype.
 

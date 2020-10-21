@@ -204,15 +204,7 @@ day-by-day basis. It is updated with new lines every day or two via a background
 
 #### Lines notes
 
-1. There can be many documents for any given gameid and ltype.
-
-1. For any given gameid and ltype, the current line for that gameid
-and ltype is the line with the most recent date.
-
-1. For any given gameid and ltype, bets are always placed against
-the line having the most recent date.
-
-1. Meaning of num depends on ltype as follows.
+1. ltype valid values are:
 
     1. **AML** Away team money line.
 
@@ -225,6 +217,14 @@ the line having the most recent date.
     1. **OV** Over points.
 
     1. **UN** Under points.
+
+1. There can be many documents for any given gameid and ltype.
+
+1. For any given gameid and ltype, the current line for that gameid
+and ltype is the line with the most recent date.
+
+1. For any given gameid and ltype, bets are always placed against
+the line having the most recent date, i.e., the current line.
 
 <h2 id="bets">Bets collection</h2>
 
@@ -261,9 +261,21 @@ user interface is used to enter bets.
       <td>Dollar amount of the bet</td>
     </tr>
     <tr>
+      <td>pays</td>
+      <td>Number</td>
+      <td>Dollars this bet pays, or null if still live</td>
+    </tr>
+    <tr>
+      <td>collects</td>
+      <td>Number</td>
+      <td>Total dollars this bet collects should bettor win; this
+          is equal to amount + pays</td>
+    </tr>
+    <tr>
       <td>paid</td>
       <td>Number</td>
-      <td>Dollars this bet paid, or null if still live</td>
+      <td>Dollar amount this bet paid, or null if bet is still live; may
+      be zero indicating this bet has resolved and was a loss for the bettor</td>
     </tr>
     <tr>
       <td>enter</td>
@@ -273,7 +285,7 @@ user interface is used to enter bets.
     <tr>
       <td>end</td>
       <td>Date</td>
-      <td>Time and Date the bet resolved</td>
+      <td>Time and Date the bet resolved, or null if the bet is still live</td>
     </tr>
   </tbody>
 </table>

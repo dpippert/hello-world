@@ -8,9 +8,24 @@
 - Amrutha Ravi
 - Madeline Rys
 
-### GitHub URL
+### GitHub URLs
 
-https://github.com/madelinerys/CS546-Final-Project
+#### Sports wagering project site
+
+<a href="https://github.com/madelinerys/CS546-Final-Project">
+https://github.com/madelinerys/CS546-Final-Project</a>
+
+#### Sports wagering project proposal 
+
+<a href="https://github.com/madelinerys/CS546-Final-Project/blob/main/doc/ProjectProposalSportsWagering.pdf">
+https://github.com/madelinerys/CS546-Final-Project/blob/main/doc/ProjectProposalSportsWagering.pdf
+</a>
+
+#### Sports wagering database proposal (this document)
+
+<a href="https://github.com/madelinerys/CS546-Final-Project/blob/main/doc/DatabaseProposalSportsWagering.pdf">
+https://github.com/madelinerys/CS546-Final-Project/blob/main/doc/DatabaseProposalSportsWagering.pdf
+</a>
 
 <div class="page"/>
 
@@ -36,7 +51,7 @@ job is responsible for populating this collection.
     <tr>
       <td>_id</td>
       <td>ObjectId</td>
-      <td></td>
+      <td>Mongo-generated key for the document</td>
     </tr>
     <tr>
       <td>away</td>
@@ -80,6 +95,8 @@ job is responsible for populating this collection.
   </tbody>
 </table>
 
+<div class="page"/>
+
 #### Games example document
 
 ```
@@ -90,7 +107,7 @@ job is responsible for populating this collection.
   week: 6,
   date: "2020-10-18T17:00:00.000Z"
   ascore: 36,
-  hscore: 42,
+  hscore: 42
 }
 ```
 
@@ -121,7 +138,7 @@ collection has exactly 32 documents in it, one per team.
     <tr>
       <td>_id</td>
       <td>ObjectId</td>
-      <td></td>
+      <td>Mongo-generated key for the document</td>
     </tr>
     <tr>
       <td>abbrv</td>
@@ -154,7 +171,7 @@ collection has exactly 32 documents in it, one per team.
 
 <div class="page"/>
 
-<h3 id="lines">Lines collection</h3>
+<h2 id="lines">Lines collection</h2>
 
 Stores betting lines for each game. The system populates this collection on a week-by-week,
 day-by-day basis. It is updated with new lines every day or two via a background job.
@@ -171,7 +188,7 @@ day-by-day basis. It is updated with new lines every day or two via a background
     <tr>
       <td>_id</td>
       <td>ObjectId</td>
-      <td></td>
+      <td>Mongo-generated key for the document</td>
     </tr>
     <tr>
       <td>gameid</td>
@@ -191,7 +208,7 @@ day-by-day basis. It is updated with new lines every day or two via a background
     <tr>
       <td>date</td>
       <td>Date</td>
-      <td>mm/dd/yyyy</td>
+      <td>Effective date of the line</td>
     </tr>
   </tbody>
 </table>
@@ -207,6 +224,8 @@ day-by-day basis. It is updated with new lines every day or two via a background
   date: "10/16/2020"
 }
 ```
+
+<div class="page"/>
 
 #### Lines notes
 
@@ -251,17 +270,17 @@ user interface is used to enter bets.
     <tr>
       <td>_id</td>
       <td>ObjectId</td>
-      <td></td>
+      <td>Mongo-generated key for the document</td>
     </tr>
     <tr>
       <td>bettorid</td>
       <td>ObjectId</td>
-      <td>_id of the bettor</td>
+      <td>_id of the bettor from <a href="#bettors">Bettors</a> collection</td>
     </tr>
     <tr>
       <td>lineid</td>
       <td>ObjectId</td>
-      <td>_id of the line</td>
+      <td>_id of the line from <a href="#lines">Lines</a> collection</td>
     </tr>
     <tr>
       <td>amount</td>
@@ -331,7 +350,7 @@ These are users aka bettors that have signed up. Possibly (time permitting) seed
     <tr>
       <td>_id</td>
       <td>ObjectId</td>
-      <td></td>
+      <td>Mongo-generated key for the document</td>
     </tr>
     <tr>
       <td>username</td>

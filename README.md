@@ -170,7 +170,7 @@ day-by-day basis. It is updated with new lines every day or two via a background
     <tr>
       <td>gameid</td>
       <td>ObjectId</td>
-      <td>_id from Games collection</td>
+      <td>_id from <a href="#games">Games</a> collection</td>
     </tr>
     <tr>
       <td>ltype</td>

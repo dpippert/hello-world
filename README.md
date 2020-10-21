@@ -24,8 +24,6 @@ job is responsible for populating this collection.
 
 #### Games schema
 
-<font face="Courier New" size="7"/>
-
 <table>
   <thead>
     <tr>
@@ -40,13 +38,13 @@ job is responsible for populating this collection.
     </tr>
     <tr>
       <td>away</td>
+      <td>String</td>
       <td>designator for away (visiting) team</td>
-      <td></td>
     </tr>
     <tr>
       <td>home</td>
+      <td>String</td>
       <td>designator for home team</td>
-      <td></td>
     </tr>
     <tr>
       <td>week</td>

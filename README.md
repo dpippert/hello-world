@@ -265,6 +265,13 @@ Records and stores bets. Each document is a bet from a bettor aka user.
 
 ````
 {
+  _id: "3e85908c9dad05d2589ae104",
+  bettorid: "4e9441Cc9dad05d268aff018", 
+  lineid: "8015617daebe1773199ec12C",
+  amount: 50,
+  paid: null,
+  enter: "10/20/2020",
+  end: null
 }
 ````
 

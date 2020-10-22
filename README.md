@@ -2,7 +2,7 @@
 
 This document has two purposes. First, it is intended to communicate our
 current understanding of the data and relationships we need to capture and manage.
-Second, it serves as a vehicle for describing early business requirements to
+Second, it serves as first steps for describing business requirements to
 team members, who in turn will be responsible for implementing the system.
 
 ### Team members
@@ -39,12 +39,13 @@ https://github.com/madelinerys/CS546-Final-Project/blob/main/doc/DatabaseProposa
 Each document describes a single NFL game, capturing only those few aspects
 of a game that are relevant to the system, such as its start date/time,
 and final score. An NFL season is 17 weeks with 14 games per week, so
-this collection for a full season would have 17 * 14 = 238 documents in
-it. It is essential that games be entered into this collection at least
-several days prior to their start time, so that bettors have a chance to
-bet on the game. The system will insert games into the collection in an
-automated fashion by either seeding the entire table all at once or by
-updating the collection with new games on a week-by-week basis.
+this collection for a full season would have 17 * 14 = 238 documents
+in it. The system will insert games into the collection in an automated
+fashion by either seeding the entire collection all at once or by updating
+the collection with new games on a week-by-week basis. Either way, it is
+essential that games be entered into this collection at least several days
+prior to their start time, so that bettors have a chance to make their
+wagers on the game.
 
 Game documents are inserted with a null ```ascore``` and null ```hscore```. A system
 background job is responsible for updating ```ascore``` and ```hscore``` with the
@@ -79,16 +80,16 @@ game's final score.
       <td>Integer</td>
       <td>Week of the season, 1-17. NFL weeks start on Tuesday and end on
       Monday. As a frame of reference, 10/21/2020 is in Week 7. If you want
-      to know, for example, what is the _current_ _week_ right now_ as a frame
-      of reference you can go to https://www.espn.com/nfl/schedule and it
-      should default to bring up the current week.</td>
+      to know, for example, what is the <em>current week right now</em> as a frame
+      of reference, you can go <a href="https://www.espn.com/nfl/schedule">here</a> and it
+      should default to bring up the current week pre-selected.</td>
     </tr>
     <tr>
       <td><code>start</code></td>
       <td>Date</td>
       <td>Game start date and time GMT. The system will not allow bets to be
-      placed on any game where **start** is >= current date and time. Upcoming
-      games must be inserted into this collection at least one week prior to ```start```,
+      placed on any game where <code>start</code> is >= current date and time. Upcoming
+      games must be inserted into this collection at least several days prior to <code>start</code>,
       so that bettors have a chance to place their wagers on the game.</td>
     </tr>
     <tr>
@@ -116,13 +117,15 @@ game's final score.
   away: "TEX",
   home: "TIT",
   week: 6,
-  date: "2020-10-18T17:00:00.000Z"
+  start: "2020-10-18T17:00:00.000Z"
   ascore: 36,
   hscore: 42
 }
 ```
 
 #### Games notes
+
+1. NFL is the <a href="http://www.nfl.com">National Football League</a>.
 
 1. GMT is four hours ahead of EDT, and five hours ahead of EST. For example,
 1:00 PM EDT is 5:00 PM GMT.
@@ -134,7 +137,7 @@ game's final score.
 
 <h2 id="teams">Teams collection</h2>
 
-A seeded reference collection to store static information for all 32 NFL teams. This
+A seeded reference collection to store static identities for all 32 NFL teams. This
 collection has exactly 32 documents in it, one per team.
 
 #### Teams schema
@@ -154,17 +157,17 @@ collection has exactly 32 documents in it, one per team.
     <tr>
       <td><code>abbrv</code></td>
       <td>String</td>
-      <td>Three-letter unique business key to enhance readability.</td>
+      <td>three-letter unique business key to enhance readability</td>
     </tr>
     <tr>
       <td><code>fran</code></td>
       <td>String</td>
-      <td>Franchise name, typically locale/city/state of team.</td>
+      <td>franchise name, typically locale/city/state of team</td>
     </tr>
     <tr>
       <td><code>nn</code></td>
       <td>String</td>
-      <td>Team nickname</td>
+      <td>team nickname</td>
     </tr>
   </tbody>
 </table>
@@ -174,7 +177,7 @@ collection has exactly 32 documents in it, one per team.
 ```
 {
   _id: "5f85808c9dad05d358aae011",
-  abbrev: "TIT",
+  abbrv: "TIT",
   fran: "Tennessee",
   nn: "Titans"
 }
@@ -204,7 +207,7 @@ day-by-day basis. It is updated with new lines every day or two via a background
     <tr>
       <td><code>gameid</code></td>
       <td>ObjectId</td>
-      <td>_id from <a href="#games">Games</a> collection</td>
+      <td><code>_id</code> from <a href="#games">Games</a> collection</td>
     </tr>
     <tr>
       <td><code>ltype</code></td>
@@ -219,7 +222,7 @@ day-by-day basis. It is updated with new lines every day or two via a background
     <tr>
       <td><code>date</code></td>
       <td>Date</td>
-      <td>Effective date of the line</td>
+      <td>effective date of the line</td>
     </tr>
   </tbody>
 </table>
@@ -232,7 +235,7 @@ day-by-day basis. It is updated with new lines every day or two via a background
   gameid: "5f8578c116e3409b5b276d50",
   ltype: "ASP",
   num: -2,
-  date: "10/16/2020"
+  date: "2020-10-16T00:00:00.000Z",
 }
 ```
 
@@ -286,44 +289,44 @@ user interface is used to enter bets.
     <tr>
       <td><code>bettorid</code></td>
       <td>ObjectId</td>
-      <td>_id of the bettor from <a href="#bettors">Bettors</a> collection</td>
+      <td><code>_id</code> of the bettor from <a href="#bettors">Bettors</a> collection</td>
     </tr>
     <tr>
       <td><code>lineid</code></td>
       <td>ObjectId</td>
-      <td>_id of the line from <a href="#lines">Lines</a> collection</td>
+      <td><code>_id</code> of the line from <a href="#lines">Lines</a> collection</td>
     </tr>
     <tr>
       <td><code>amount</code></td>
       <td>Number</td>
-      <td>Dollar amount of the bet</td>
+      <td>dollar amount of the bet</td>
     </tr>
     <tr>
       <td><code>pays</code></td>
       <td>Number</td>
-      <td>Dollars this bet pays, or null if still live</td>
+      <td>dollars this bet pays, or null if bet is still live</td>
     </tr>
     <tr>
       <td><code>collects</code></td>
       <td>Number</td>
-      <td>Total dollars this bet collects should bettor win; this
+      <td>total dollars this bet collects should bettor win; this
           is equal to amount + pays</td>
     </tr>
     <tr>
       <td><code>paid</code></td>
       <td>Number</td>
-      <td>Dollar amount this bet paid, or null if bet is still live; may
+      <td>dollar amount this bet paid, or null if bet is still live; may
       be zero indicating this bet has resolved and was a loss for the bettor</td>
     </tr>
     <tr>
-      <td><code>enter</code></td>
+      <td><code>entered</code></td>
       <td>Date</td>
-      <td>Time and Date of the bet</td>
+      <td>time and date of the bet</td>
     </tr>
     <tr>
-      <td><code>end</code></td>
+      <td><code>closed</code></td>
       <td>Date</td>
-      <td>Time and Date the bet resolved, or null if the bet is still live</td>
+      <td>time and date the bet resolved, or null if bet is still live</td>
     </tr>
   </tbody>
 </table>
@@ -335,10 +338,12 @@ user interface is used to enter bets.
   _id: "3e85908c9dad05d2589ae104",
   bettorid: "4e9441Cc9dad05d268aff018", 
   lineid: "8015617daebe1773199ec12C",
-  amount: 50,
+  amount: 55,
+  pays: 50,
+  collects: 105,
   paid: null,
-  enter: "10/20/2020",
-  end: null
+  entered: "2020-10-22T14:12:35.738Z",
+  closed: null
 }
 ````
 
@@ -376,7 +381,7 @@ These are users aka bettors that have signed up. Possibly (time permitting) seed
     <tr>
       <td><code>balance</code></td>
       <td>Number</td>
-      <td>Dollar balance in account</td>
+      <td>dollar balance in account</td>
     </tr>
 </tbody>
 </table>
@@ -393,4 +398,4 @@ These are users aka bettors that have signed up. Possibly (time permitting) seed
 ```
 
 1. Surprisingly, this collection will be seeded with exactly the same 1000 people
-as are present in an earlier people.json lab. They all like to bet!
+from an earlier people.json lab. Apparently they all like to gamble!

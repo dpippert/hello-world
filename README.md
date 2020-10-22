@@ -31,13 +31,19 @@ https://github.com/madelinerys/CS546-Final-Project/blob/main/doc/DatabaseProposa
 
 <h2 id="games">Games collection</h2>
 
-Each document describes an NFL game, capturing only those few aspects of
-a game that are relevant to the system, such as its start date and time,
-and final score.  An NFL season is 17 weeks with 14 games per week, so
+Each document describes a single NFL game, capturing only those few aspects
+of a game that are relevant to the system, such as its start date/time,
+and final score. An NFL season is 17 weeks with 14 games per week, so
 this collection for a full season would have 17 * 14 = 238 documents in
-it. Each week, another 14 games are added to the table. Alternatively,
-it could be seeded with all 238 games at once. Either way an automated
-job is responsible for populating this collection.
+it. It is essential that games be entered into this collection at least
+several days prior to their start time, so that bettors have a chance to
+bet on the game. The system will insert games into the collection in an
+automated fashion by either seeding the entire table all at once or by
+updating the collection with new games on a week-by-week basis.
+
+Game documents are inserted with a null ```ascore``` and null ```hscore```. A system
+background job is responsible for updating ```ascore``` and ```hscore``` with the
+game's final score.
 
 #### Games schema
 
@@ -49,22 +55,22 @@ job is responsible for populating this collection.
   </thead>
   <tbody>
     <tr>
-      <td>_id</td>
+      <td><code>_id</code></td>
       <td>ObjectId</td>
       <td>Mongo-generated key for the document</td>
     </tr>
     <tr>
-      <td>away</td>
+      <td><code>away</code></td>
       <td>String</td>
       <td>designator for away (visiting) team</td>
     </tr>
     <tr>
-      <td>home</td>
+      <td><code>home</code></td>
       <td>String</td>
       <td>designator for home team</td>
     </tr>
     <tr>
-      <td>week</td>
+      <td><code>week</code></td>
       <td>Integer</td>
       <td>Week of the season, 1-17. NFL weeks start on Tuesday and end on
       Monday. As a frame of reference, 10/21/2020 is in Week 7. If you want
@@ -73,21 +79,21 @@ job is responsible for populating this collection.
       should default to bring up the current week.</td>
     </tr>
     <tr>
-      <td>start</td>
+      <td><code>start</code></td>
       <td>Date</td>
       <td>Game start date and time GMT. The system will not allow bets to be
       placed on any game where **start** is >= current date and time. Upcoming
-      games must be inserted into this table at least one week prior to *start*,
+      games must be inserted into this collection at least one week prior to ```start```,
       so that bettors have a chance to place their wagers on the game.</td>
     </tr>
     <tr>
-      <td>ascore</td>
+      <td><code>ascore</code></td>
       <td>Integer</td>
       <td>Away team final score. Null up until when the game has finished and the
       system has processed the final score feed.</td>
     </tr>
     <tr>
-      <td>hscore</td>
+      <td><code>hscore</code></td>
       <td>Integer</td>
       <td>Home team final score. Null up until when the game has finished and the
       system has processed the final score feed.</td>
@@ -117,7 +123,7 @@ job is responsible for populating this collection.
 1:00 PM EDT is 5:00 PM GMT.
 
 1. Designators for teams defined in <a href=#teams>Teams</a> collection as
-Teams.abbrv.
+```Teams.abbrv```.
 
 <div class="page"/>
 

@@ -1,5 +1,10 @@
 ## Sports Wagering Database Proposal
 
+This document has two purposes. First, it is intended to communicate our
+current understanding of the data and relationships we need to capture and manage.
+Second, it serves as a vehicle for describing early business requirements to
+team members, who in turn will be responsible for implementing the system.
+
 ### Team members
 
 - Christian Wettre
@@ -142,22 +147,22 @@ collection has exactly 32 documents in it, one per team.
   </thead>
   <tbody>
     <tr>
-      <td>_id</td>
+      <td><code>_id</code></td>
       <td>ObjectId</td>
       <td>Mongo-generated key for the document</td>
     </tr>
     <tr>
-      <td>abbrv</td>
+      <td><code>abbrv</code></td>
       <td>String</td>
       <td>Three-letter unique business key to enhance readability.</td>
     </tr>
     <tr>
-      <td>fran</td>
+      <td><code>fran</code></td>
       <td>String</td>
       <td>Franchise name, typically locale/city/state of team.</td>
     </tr>
     <tr>
-      <td>nn</td>
+      <td><code>nn</code></td>
       <td>String</td>
       <td>Team nickname</td>
     </tr>
@@ -192,27 +197,27 @@ day-by-day basis. It is updated with new lines every day or two via a background
   </thead>
   <tbody>
     <tr>
-      <td>_id</td>
+      <td><code>_id</code></td>
       <td>ObjectId</td>
       <td>Mongo-generated key for the document</td>
     </tr>
     <tr>
-      <td>gameid</td>
+      <td><code>gameid</code></td>
       <td>ObjectId</td>
       <td>_id from <a href="#games">Games</a> collection</td>
     </tr>
     <tr>
-      <td>ltype</td>
+      <td><code>ltype</code></td>
       <td>String</td>
       <td>AML|HML|ASP|HSP|OV|UN (see notes)</td>
     </tr>
     <tr>
-      <td>num</td>
+      <td><code>num</code></td>
       <td>Integer</td>
-      <td>The number, the meaning of which depends on ltype; may be positive, negative, or 0.</td>
+      <td>The number, the meaning of which depends on <code>ltype</code>; may be positive, negative, or 0.</td>
     </tr>
     <tr>
-      <td>date</td>
+      <td><code>date</code></td>
       <td>Date</td>
       <td>Effective date of the line</td>
     </tr>
@@ -235,26 +240,26 @@ day-by-day basis. It is updated with new lines every day or two via a background
 
 #### Lines notes
 
-1. ltype valid values are:
+1. ```ltype``` valid values are:
 
-    1. **AML** Away team money line.
+    a. **AML** Away team money line.
 
-    1. **HML** Home team money line.
+    b. **HML** Home team money line.
 
-    1. **ASP** Away team spread.
+    c. **ASP** Away team spread.
     
-    1. **HSP** Home team spread.
+    d. **HSP** Home team spread.
     
-    1. **OV** Over points.
+    e. **OV** Over points.
 
-    1. **UN** Under points.
+    f. **UN** Under points.
 
-1. There can be many documents for any given gameid and ltype.
+1. There can be many documents for any given ```gameid``` and ```ltype```.
 
-1. For any given gameid and ltype, the current line for that gameid
-and ltype is the line with the most recent date.
+1. For any given ```gameid``` and ```ltype```, the current line for that ```gameid```
+and ```ltype``` is the line with the most recent date.
 
-1. For any given gameid and ltype, bets are always placed against
+1. For any given ```gameid``` and ```ltype```, bets are always placed against
 the line having the most recent date, i.e., the current line.
 
 <div class="page"/>
@@ -274,49 +279,49 @@ user interface is used to enter bets.
   </thead>
   <tbody>
     <tr>
-      <td>_id</td>
+      <td><code>_id</code></td>
       <td>ObjectId</td>
       <td>Mongo-generated key for the document</td>
     </tr>
     <tr>
-      <td>bettorid</td>
+      <td><code>bettorid</code></td>
       <td>ObjectId</td>
       <td>_id of the bettor from <a href="#bettors">Bettors</a> collection</td>
     </tr>
     <tr>
-      <td>lineid</td>
+      <td><code>lineid</code></td>
       <td>ObjectId</td>
       <td>_id of the line from <a href="#lines">Lines</a> collection</td>
     </tr>
     <tr>
-      <td>amount</td>
+      <td><code>amount</code></td>
       <td>Number</td>
       <td>Dollar amount of the bet</td>
     </tr>
     <tr>
-      <td>pays</td>
+      <td><code>pays</code></td>
       <td>Number</td>
       <td>Dollars this bet pays, or null if still live</td>
     </tr>
     <tr>
-      <td>collects</td>
+      <td><code>collects</code></td>
       <td>Number</td>
       <td>Total dollars this bet collects should bettor win; this
           is equal to amount + pays</td>
     </tr>
     <tr>
-      <td>paid</td>
+      <td><code>paid</code></td>
       <td>Number</td>
       <td>Dollar amount this bet paid, or null if bet is still live; may
       be zero indicating this bet has resolved and was a loss for the bettor</td>
     </tr>
     <tr>
-      <td>enter</td>
+      <td><code>enter</code></td>
       <td>Date</td>
       <td>Time and Date of the bet</td>
     </tr>
     <tr>
-      <td>end</td>
+      <td><code>end</code></td>
       <td>Date</td>
       <td>Time and Date the bet resolved, or null if the bet is still live</td>
     </tr>
@@ -354,22 +359,22 @@ These are users aka bettors that have signed up. Possibly (time permitting) seed
   </thead>
   <tbody>
     <tr>
-      <td>_id</td>
+      <td><code>_id</code></td>
       <td>ObjectId</td>
       <td>Mongo-generated key for the document</td>
     </tr>
     <tr>
-      <td>username</td>
+      <td><code>username</code></td>
       <td>String</td>
       <td></td>
     </tr>
     <tr>
-      <td>pwd</td>
+      <td><code>pwd</code></td>
       <td>String</td>
       <td>md5 hashed password</td>
     </tr>
     <tr>
-      <td>balance</td>
+      <td><code>balance</code></td>
       <td>Number</td>
       <td>Dollar balance in account</td>
     </tr>

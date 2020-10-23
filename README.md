@@ -1,9 +1,11 @@
 ## Sports Wagering Database Proposal
 
-This document has two purposes. First, it is intended to communicate our
-current understanding of the data and relationships we need to capture and manage.
-Second, it serves as first steps for describing business requirements to
-team members, who in turn will be responsible for implementing the system.
+This document has two purposes. First, it is intended to present our
+current understanding of the data and relationships we believe are needed in
+order to realize our idea. Second, it serves as first steps for capturing
+business requirements, so that stakeholders, and especially team members,
+can begin to internalize and get comfortable with the concepts underlying
+the data.
 
 ### Team members
 
@@ -38,18 +40,19 @@ https://github.com/madelinerys/CS546-Final-Project/blob/main/doc/DatabaseProposa
 
 Each document describes a single NFL game, capturing only those few aspects
 of a game that are relevant to the system, such as its start date/time,
-and final score. An NFL season is 17 weeks with 14 games per week, so
+and final score. An NFL season is 17 consecutive weeks, with 14 games per week, so
 this collection for a full season would have 17 * 14 = 238 documents
 in it. The system will insert games into the collection in an automated
 fashion by either seeding the entire collection all at once or by updating
 the collection with new games on a week-by-week basis. Either way, it is
 essential that games be entered into this collection at least several days
 prior to their start time, so that bettors have a chance to make their
-wagers on the game.
+wagers on any games for that week.
 
-Game documents are inserted with a null ```ascore``` and null ```hscore```. A system
-background job is responsible for updating ```ascore``` and ```hscore``` with the
-game's final score.
+Game documents are inserted with a null ```ascore``` and null
+```hscore```. After the game is played, a system background job is
+responsible for updating ```ascore``` and ```hscore``` with the game's
+final score.
 
 #### Games schema
 
